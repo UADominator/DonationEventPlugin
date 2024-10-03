@@ -8,3 +8,8 @@ commands:
     description: Показати останні донати.
     usage: /lastdonations
     permission: donationevents.view
+
+  setAPIkey:
+    description: Встановити АПІ ключ.
+    usage: /setAPIkey
+    permission: setAPIKey

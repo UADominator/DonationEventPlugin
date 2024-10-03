@@ -18,7 +18,13 @@ public class SetApiKeyCommand implements CommandExecutor {
             sender.sendMessage("Ви не маєте прав для виконання цієї команди.");
             return false;
         }
-        plugin.api.setAPIkey(args[0]);
+
+        if(args.length < 2 ){
+            sender.sendMessage("Встановіть ключ 1-Dyaka 2-Donatello 3-Mono");
+            return false;
+        }
+        sender.sendMessage("Успіх");
+        DonationEvents.api.setAPIkey(args[0], args[1]);
         return true;
     }
 }

@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.dominator.donationEvents.DonationEvents;
+import org.dominator.donationEvents.workWithApi.APIusageType.DonatelloAPI;
 import org.dominator.donationEvents.workWithApi.APIusageType.DyakaAPI;
 
 public class GetLastDonationsCommand implements CommandExecutor {
@@ -22,12 +23,13 @@ public class GetLastDonationsCommand implements CommandExecutor {
             return false;
         }
 
-        if (plugin.api.getAPIkey().equals("")) {
+        if (DonationEvents.api.getAPIkey().equals("")) {
             sender.sendMessage("Встановіть ключ.");
             return false;
         }
 
-        new DyakaAPI(plugin).getRecentDonations(sender);
+        new DyakaAPI(plugin).getJsonDonators(DonationEvents.api.getAPIkey());
+        new DonatelloAPI(plugin).getJsonDonators(DonationEvents.api.getAPIkey());
         return true;
     }
 }

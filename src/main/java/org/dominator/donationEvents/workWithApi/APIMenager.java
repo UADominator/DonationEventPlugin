@@ -1,23 +1,50 @@
 package org.dominator.donationEvents.workWithApi;
 
 public class APIMenager {
-    public String APIkey;
-    public int keyType = 1;
+    public String DyakaAPIkey;
+    public String DonatelloAPIkey;
+    public String MonoAPIkey;
+    public String  keyType;
 
-    public void setAPIkey(String APIkey) {
-        this.APIkey = APIkey;
+    public APIMenager(String APIkey) {
+        this(APIkey, "0");
+    }
+
+    public APIMenager(String APIkey, String keyType) {
+        this.setAPIkey(APIkey, keyType);
+    }
+
+
+
+    public String getKeyType() {
+        return keyType;
+    }
+
+    public void setAPIkey(String APIkey, String keyType) {
+        this.keyType=keyType;
+        switch (this.keyType){
+            case "1": this.DyakaAPIkey = APIkey;
+            case "2": this.DonatelloAPIkey = APIkey;
+            case "3": this.MonoAPIkey = APIkey;
+            default: return;
+        }
+    }
+
+    public String getAPIkey(String keyType) {
+        switch (keyType){
+            case "1": return DyakaAPIkey;
+            case "2":  return DonatelloAPIkey;
+            case "3": return MonoAPIkey;
+            default: return "";
+        }
     }
 
     public String getAPIkey() {
-        return APIkey;
-    }
-
-    public APIMenager(String APIkey) {
-        this(APIkey, 1);
-    }
-
-    public APIMenager(String APIkey, int keyType) {
-        this.APIkey = APIkey;
-        this.keyType = keyType;
+        switch (this.keyType){
+            case "1": return DyakaAPIkey;
+            case "2":  return DonatelloAPIkey;
+            case "3": return MonoAPIkey;
+            default: return "";
+        }
     }
 }

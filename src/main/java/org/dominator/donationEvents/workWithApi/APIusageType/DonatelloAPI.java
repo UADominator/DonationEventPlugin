@@ -11,52 +11,54 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
-public class DyakaAPI {
+public class DonatelloAPI {
 
     private final DonationEvents plugin;
-    private String lastDonationId = "";
+    private String lastDonationId = "";  // Ідентифікатор останнього донату
 
-    public DyakaAPI(DonationEvents plugin) {
+    public DonatelloAPI(DonationEvents plugin) {
         this.plugin = plugin;
     }
 
     // Метод для перевірки та відправки повідомлення про новий донат
     public void checkForNewDonations() {
-        String conveyorHash = plugin.api.getAPIkey();
-        getJsonDonators(conveyorHash).thenAccept(json -> {
+        String token = plugin.api.getAPIkey();
+        getJsonDonators(token).thenAccept(json -> {
             if (json != null) {
-                JSONArray donations = new JSONObject(json).getJSONArray("donations");
+                JSONArray donations = new JSONObject(json).getJSONArray("content");
                 if (donations.length() > 0) {
                     JSONObject lastDonation = donations.getJSONObject(0);
-                    String donationId = lastDonation.getString("id");
+                    String donationId = lastDonation.getString("pubId");
 
-                    //if (!donationId.equals(lastDonationId)) {
-                        lastDonationId = donationId;
+                    // Якщо є новий донат, надсилаємо повідомлення в чат
+                    if (!donationId.equals(lastDonationId)) {
+                        lastDonationId = donationId; // Оновлюємо останній отриманий донат
                         String clientName = lastDonation.getString("clientName");
                         String amount = lastDonation.getString("amount");
                         String message = lastDonation.optString("message", "");
 
+                        // Відправляємо повідомлення в чат Minecraft
                         Bukkit.broadcastMessage("Прийшов донат від " + clientName + ": " + amount + " UAH. " + message);
-                    //}
+                    }
                 }
             }
         });
     }
 
-    public CompletableFuture<String> getJsonDonators(String conveyorHash) {
-        String baseUrl = "https://dyaka.com/api/v1/message/stats";
-        String action = "recent";
-        int limit = 5;
-        int test = 1;
+    // Отримуємо JSON з донатами
+    public CompletableFuture<String> getJsonDonators(String token) {
+        String baseUrl = "https://donatello.to/api/v1/donates";
+        int page = 0;
+        int size = 5;
 
-        String url = String.format("%s?action=%s&conveyorHash=%s&params[limit]=%d&params[test]=%d",
-                baseUrl, action, conveyorHash, limit, test);
+        String url = String.format("%s?page=%d&size=%d", baseUrl, page, size);
 
         HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("User-Agent", "Minecraft-DonationEvents")
+                .header("X-Token", token)
                 .GET()
                 .build();
 
