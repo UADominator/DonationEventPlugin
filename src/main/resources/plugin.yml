@@ -1,0 +1,10 @@
+name: DonationEvents
+version: '1.0'
+main: org.dominator.donationEvents.DonationEvents
+api-version: '1.21'
+authors: [ Dominator ]
+commands:
+  lastdonations:
+    description: Показати останні донати.
+    usage: /lastdonations
+    permission: donationevents.view
