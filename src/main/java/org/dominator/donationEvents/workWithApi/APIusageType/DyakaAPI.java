@@ -20,43 +20,40 @@ public class DyakaAPI {
         this.plugin = plugin;
     }
 
-    // Метод для перевірки та відправки повідомлення про новий донат
     public void checkForNewDonations() {
-        String conveyorHash = plugin.api.getAPIkey();
-        getJsonDonators(conveyorHash).thenAccept(json -> {
+        String token = plugin.api.getAPIkey(1);
+        getJsonDonators(token).thenAccept(json -> {
             if (json != null) {
                 JSONArray donations = new JSONObject(json).getJSONArray("donations");
                 if (donations.length() > 0) {
                     JSONObject lastDonation = donations.getJSONObject(0);
                     String donationId = lastDonation.getString("id");
+                    lastDonationId = donationId;
+                    String clientName = lastDonation.getString("name");
+                    String amount = lastDonation.getString("amount");
+                    String message = lastDonation.optString("message", "");
 
-                    //if (!donationId.equals(lastDonationId)) {
-                        lastDonationId = donationId;
-                        String clientName = lastDonation.getString("clientName");
-                        String amount = lastDonation.getString("amount");
-                        String message = lastDonation.optString("message", "");
-
-                        Bukkit.broadcastMessage("Прийшов донат від " + clientName + ": " + amount + " UAH. " + message);
-                    //}
+                    Bukkit.broadcastMessage("Прийшов донат від " + clientName + ": " + amount + " UAH. " + message);
                 }
             }
         });
     }
 
-    public CompletableFuture<String> getJsonDonators(String conveyorHash) {
+    // Отримуємо JSON з останніми донатами
+    public CompletableFuture<String> getJsonDonators(String token) {
         String baseUrl = "https://dyaka.com/api/v1/message/stats";
         String action = "recent";
         int limit = 5;
         int test = 1;
 
         String url = String.format("%s?action=%s&conveyorHash=%s&params[limit]=%d&params[test]=%d",
-                baseUrl, action, conveyorHash, limit, test);
+                baseUrl, action, token, limit, test);
 
         HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("User-Agent", "Minecraft-DonationEvents")
+                .header("User-Agent", "Mozilla/5.0")
                 .GET()
                 .build();
 
@@ -69,5 +66,9 @@ public class DyakaAPI {
                     }
                     return responseBody;
                 });
+    }
+
+    public  String getJsonStringDonators(String token){
+       return  getJsonDonators(token).join();
     }
 }

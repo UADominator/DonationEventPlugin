@@ -13,3 +13,4 @@ commands:
     description: Встановити АПІ ключ.
     usage: /setAPIkey
     permission: setAPIKey
+

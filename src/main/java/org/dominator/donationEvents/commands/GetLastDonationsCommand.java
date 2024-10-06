@@ -4,8 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.dominator.donationEvents.DonationEvents;
-import org.dominator.donationEvents.workWithApi.APIusageType.DonatelloAPI;
-import org.dominator.donationEvents.workWithApi.APIusageType.DyakaAPI;
 
 public class GetLastDonationsCommand implements CommandExecutor {
 
@@ -17,19 +15,25 @@ public class GetLastDonationsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // Перевірка наявності прав
-        if (!sender.hasPermission("donationevents.view") && plugin.api.getAPIkey().equals("")) {
+        if (!sender.hasPermission("donationevents.view")) {
             sender.sendMessage("Ви не маєте прав для виконання цієї команди.");
             return false;
         }
 
-        if (DonationEvents.api.getAPIkey().equals("")) {
-            sender.sendMessage("Встановіть ключ.");
+        String  token = plugin.api.getAPIkey(2);
+        if (token == null) {
+            plugin.getLogger().severe("Токен для Donatello API == null.");
             return false;
         }
 
-        new DyakaAPI(plugin).getJsonDonators(DonationEvents.api.getAPIkey());
-        new DonatelloAPI(plugin).getJsonDonators(DonationEvents.api.getAPIkey());
+        plugin.donatelloAPI.getJsonDonators(token).thenAccept(response -> {
+            if (response != null) {
+                sender.sendMessage(response);
+            } else {
+                sender.sendMessage("Не вдалося отримати дані донатів.");
+            }
+        });
+
         return true;
     }
 }
