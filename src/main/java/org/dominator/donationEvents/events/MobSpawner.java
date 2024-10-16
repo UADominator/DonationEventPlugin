@@ -17,7 +17,7 @@ public class MobSpawner {
         public void spawnMob(EntityType mobType) {
             Bukkit.getScheduler().runTask(plugin, () -> {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    Location spawnLocation = player.getLocation().add(2, 0, 2); // Зсув на 2 блоки вперед від позиції гравця
+                    Location spawnLocation = player.getLocation(); // Зсув на 2 блоки вперед від позиції гравця
                     player.getWorld().spawnEntity(spawnLocation, mobType); // Спавним моба
                     plugin.getLogger().info("Спавн моба " + mobType.name() + " біля гравця " + player.getName());
                 }

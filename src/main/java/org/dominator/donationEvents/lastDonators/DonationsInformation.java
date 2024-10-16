@@ -59,7 +59,7 @@ public class DonationsInformation {
         return this.dateTime.isEqual(other.getDateTime());
     }
 
-    private class DateTime {
+    public static class DateTime {
         int year;
         int month;
         int day;
