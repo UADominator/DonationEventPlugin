@@ -3,6 +3,7 @@
     {
       "events": {
         "eventName": "Броньований Зомбі",
+        "icon": "minecraft:iron_chestplate",
         "price": {
           "startSum": 10,
           "endSum": 50
@@ -24,6 +25,7 @@
     {
       "events": {
         "eventName": "Скелет з ефектом швидкості",
+        "icon": "minecraft:potion",
         "price": {
           "startSum": 51,
           "endSum": 100
@@ -40,6 +42,7 @@
     {
       "events": {
         "eventName": "Броньований Ведмідь",
+        "icon": "minecraft:diamond_chestplate",
         "price": {
           "startSum": 101,
           "endSum": 150
@@ -56,6 +59,7 @@
     {
       "events": {
         "eventName": "Дракон з ефектом ночі",
+        "icon": "minecraft:dragon_head",
         "price": {
           "startSum": 151,
           "endSum": 200
@@ -72,6 +76,7 @@
     {
       "events": {
         "eventName": "Нічний Зомбі",
+        "icon": "minecraft:coal_block",
         "price": {
           "startSum": 201,
           "endSum": 300
@@ -88,6 +93,7 @@
     {
       "events": {
         "eventName": "Багато Слабких Зомбі",
+        "icon": "minecraft:zombie_spawn_egg",
         "price": {
           "startSum": 1,
           "endSum": 50
@@ -107,11 +113,6 @@
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @p run %s",
             "addition": "summon minecraft:zombie ~2 ~ ~ {HandItems:[{id:\"minecraft:golden_sword\",Count:1b}],ActiveEffects:[{Id:12,Duration:999999,Amplifier:0},{Id:5,Duration:999999,Amplifier:1}]}"
-          },
-          {
-            "type": "STRING_PLAYER_STRING",
-            "command": "execute as %s at @p run %s",
-            "addition": "summon minecraft:zombie ~-2 ~ ~ {HandItems:[{id:\"minecraft:golden_sword\",Count:1b}],ActiveEffects:[{Id:12,Duration:999999,Amplifier:0},{Id:5,Duration:999999,Amplifier:1}]}"
           }
         ]
       }

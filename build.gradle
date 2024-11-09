@@ -7,6 +7,7 @@ version = '1.0'
 
 repositories {
     mavenCentral()
+    maven { url "https://repo.codemc.io/repository/maven-public/" }
     maven {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
@@ -20,6 +21,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation 'org.json:json:20210307'
+    implementation 'de.tr7zw:item-nbt-api-plugin:2.9.1@jar'
 }
 
 def targetJavaVersion = 21

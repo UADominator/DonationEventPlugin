@@ -3,7 +3,9 @@ package org.dominator.donationEvents.lastDonators;
 import com.google.gson.JsonObject;
 import org.json.JSONObject;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class DonationsInformation {
@@ -27,7 +29,6 @@ public class DonationsInformation {
                 json.get("createdAt").getAsString()
         );
     }
-
 
     public double getAmount() {
         return amount;

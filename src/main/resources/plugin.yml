@@ -4,7 +4,7 @@ main: org.dominator.donationEvents.DonationEvents
 api-version: '1.21'
 authors: [ Dominator ]
 commands:
-  lastdonations:
+  lastDonations:
     description: Показати останні донати.
     usage: /lastdonations
     permission: donationevents.view
@@ -14,3 +14,12 @@ commands:
     usage: /setAPIkey
     permission: setAPIKey
 
+  openSettingsMenu:
+    description: Відкрити меню налаштування.
+    usage: /openSettingsMenu
+    permission: openSettingsMenu
+
+  randEventSum:
+    description: Випадковий івент із сумою N.
+    usage: /randEventSum
+    permission: randEventSum

@@ -2,12 +2,12 @@ package org.dominator.donationEvents.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import java.util.Random;
-import org.bukkit.entity.Player;
-import org.dominator.donationEvents.DonationEvents;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.dominator.donationEvents.DonationEvents;
 
 public class CustomEventHandler {
     private final DonationEvents plugin;
@@ -27,10 +27,14 @@ public class CustomEventHandler {
                 newEvents.add(oth);
             }
         }
-        int randInt = getRandInt(newEvents.size());
-        plugin.getLogger().info("Кількість доступних івентів: " + newEvents.size());
-        plugin.getLogger().info("Випадкове число: " + randInt);
-        commandUse(newEvents.get(randInt));
+        if (newEvents.size() > 0) {
+            int randInt = getRandInt(newEvents.size());
+            plugin.getLogger().info("Кількість доступних івентів: " + newEvents.size());
+            plugin.getLogger().info("Випадкове число: " + randInt);
+            commandUse(newEvents.get(randInt));
+        } else {
+            plugin.getLogger().info("Відсутні доступні івенти");
+        }
     }
 
     private void commandUse(EventsArrays event){
@@ -82,6 +86,10 @@ public class CustomEventHandler {
 
     public void commandUseCustomEvent(EventsArrays.Events.Commands command){
         // TODO: тут тре буде щось
+        switch (command.command){
+            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
+
+        }
     }
 
     public Player getFirstOnlinePlayer() {
@@ -95,5 +103,31 @@ public class CustomEventHandler {
 
     public int getRandInt(int endInt){
         return new Random().nextInt(endInt);
+    }
+
+
+
+
+    ///////////////////////CUSTOM EVENTS//////////////////////////////////
+
+
+    public void shuffleInventory(Player player) {
+        plugin.getLogger().info("Перемішую інвентар");
+
+        ItemStack[] inventoryContents = player.getInventory().getContents();
+
+        List<ItemStack> inventoryItems = new ArrayList<>(Arrays.asList(inventoryContents));
+
+        Collections.shuffle(inventoryItems);
+
+        player.getInventory().clear();
+
+        for (int i = 0; i < inventoryItems.size(); i++) {
+            player.getInventory().setItem(i, inventoryItems.get(i));
+        }
+
+        for (int i = inventoryItems.size(); i < inventoryContents.length; i++) {
+            player.getInventory().setItem(i, null);
+        }
     }
 }

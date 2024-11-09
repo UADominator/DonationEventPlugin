@@ -1,5 +1,7 @@
 package org.dominator.donationEvents.events;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +14,15 @@ public class EventsArrays {
 
     public static  class Events {
         public String eventName;
+        public String icon;
         public Price price;
         public List<Commands> commands = new ArrayList<>();
 
-        public Events(List<Commands> commands, Price price, String eventName) {
+        public Events(List<Commands> commands, Price price, String eventName, String icon) {
             this.commands = commands;
             this.price = price;
             this.eventName = eventName;
+            this.icon = icon;
         }
 
         public Events(Price price) {
@@ -42,13 +46,37 @@ public class EventsArrays {
         }
 
 
-        public static  class Price {
+        public static class Price {
             double startSum;
             double endSum;
 
             public Price(double startSum, double endSum) {
                 this.startSum = startSum;
                 this.endSum = endSum;
+            }
+
+            public boolean changeMaxSum(double endSum){
+                if (this.startSum > endSum){
+                    return false;
+                }
+                this.endSum = endSum;
+                return true;
+            }
+
+            public boolean changeMinSum(double startSum){
+                if (this.endSum < startSum){
+                    return false;
+                }
+                this.startSum = startSum;
+                return true;
+            }
+
+            public double getStartSum() {
+                return startSum;
+            }
+
+            public double getEndSum() {
+                return endSum;
             }
         }
 
