@@ -19,7 +19,6 @@ public class CustomEventHandler {
     public void eventsCrossroads(double amount) {
         plugin.getLogger().info("Вхідна сума: " + amount);
 
-        plugin.getLogger().info("Кількість всіх івентів: " + plugin.eventsArraysList.size());
 
         List<EventsArrays> newEvents = new ArrayList<>();
         for (EventsArrays oth : plugin.eventsArraysList){
@@ -85,10 +84,12 @@ public class CustomEventHandler {
     }
 
     public void commandUseCustomEvent(EventsArrays.Events.Commands command){
-        // TODO: тут тре буде щось
+        // TODO: тут тре буде ще щось
         switch (command.command){
             case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
-
+//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
+//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
+//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
         }
     }
 

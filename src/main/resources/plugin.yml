@@ -23,3 +23,8 @@ commands:
     description: Випадковий івент із сумою N.
     usage: /randEventSum
     permission: randEventSum
+
+  reloadEvents:
+    description: Завантажити івенти із файлу.
+    usage: /loadEvents
+    permission: loadEvents

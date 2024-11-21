@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.dominator.donationEvents.DonationEvents;
 import org.dominator.donationEvents.menu.CustomMenu;
 
-import java.util.Arrays;
-
 public class OpenSettingsMenu implements CommandExecutor {
     private final DonationEvents plugin;
 

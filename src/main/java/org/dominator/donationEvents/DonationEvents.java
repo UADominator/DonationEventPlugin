@@ -7,14 +7,9 @@ import com.google.gson.JsonObject;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.Bukkit;
-import org.dominator.donationEvents.commands.GetLastDonationsCommand;
-import org.dominator.donationEvents.commands.OpenSettingsMenu;
-import org.dominator.donationEvents.commands.SetApiKeyCommand;
-import org.dominator.donationEvents.commands.StartRandEvent;
+import org.dominator.donationEvents.commands.*;
 import org.dominator.donationEvents.events.CustomEventHandler;
 import org.dominator.donationEvents.events.EventsArrays;
-import org.dominator.donationEvents.events.MobSpawner;
-import org.dominator.donationEvents.events.SummonCommand;
 import org.dominator.donationEvents.lastDonators.DonationsInformation;
 import org.dominator.donationEvents.menu.CustomMenu;
 import org.dominator.donationEvents.workWithApi.APIMenager;
@@ -24,9 +19,7 @@ import org.dominator.donationEvents.workWithApi.APIusageType.MonobankAPI;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileReader;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -41,9 +34,7 @@ public final class DonationEvents extends JavaPlugin {
     public DonatelloAPI donatelloAPI;
     public MonobankAPI monobankAPI;
 
-    public MobSpawner mobSpawner;
     public CustomEventHandler customEventHandler;
-    public SummonCommand summonCommand;
 
     public List<DonationsInformation> donationsInformation = new ArrayList<>(10);
     public DonationsInformation.DateTime startTime;
@@ -92,8 +83,6 @@ public final class DonationEvents extends JavaPlugin {
         monobankAPI = new MonobankAPI(this);
 
         customEventHandler = new CustomEventHandler(this);
-        mobSpawner = new MobSpawner(this);
-        summonCommand = new SummonCommand(this);
 
         startDonationCheckTask();
 
@@ -101,6 +90,7 @@ public final class DonationEvents extends JavaPlugin {
         this.getCommand("lastDonations").setExecutor(new GetLastDonationsCommand(this));
         this.getCommand("openSettingsMenu").setExecutor(new OpenSettingsMenu(this));
         this.getCommand("randEventSum").setExecutor(new StartRandEvent(this));
+        this.getCommand("reloadEvents").setExecutor(new ReLoadEvents(this));
         getServer().getPluginManager().registerEvents(new CustomMenu(this), this);
     }
 
@@ -145,8 +135,6 @@ public final class DonationEvents extends JavaPlugin {
 
                 // Вираховуємо різницю в мілісекундах між поточним часом і часом створення донату
                 long delay = ChronoUnit.MILLIS.between(currentTime, createdAtTime.plusSeconds(20));
-
-                this.getLogger().info("Затримка: " + delay);
 
                 if (delay < 0) {
                     delay = 0;

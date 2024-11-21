@@ -2,121 +2,598 @@
   "eventsArrays": [
     {
       "events": {
-        "eventName": "Броньований Зомбі",
-        "icon": "minecraft:iron_chestplate",
-        "price": {
-          "startSum": 10,
-          "endSum": 50
-        },
-        "commands": [
-          {
-            "type": "STRING_CORDS_STRING",
-            "command": "summon zombie %d %d %d %s",
-            "addition": "{ArmorItems:[{},{\"id\":\"minecraft:iron_helmet\",\"Count\":1b},{\"id\":\"minecraft:iron_chestplate\",\"Count\":1b},{\"id\":\"minecraft:iron_leggings\",\"Count\":1b},{\"id\":\"minecraft:iron_boots\",\"Count\":1b}],\"CustomName\":\"\\\"Броньований Зомбі\\\"\",\"Health\":40.0f,\"HandItems\":[{\"id\":\"minecraft:iron_sword\",\"Count\":1b,\"tag\":{\"Enchantments\":[{\"id\":\"minecraft:sharpness\",\"lvl\":2}]}}]}"
-          },
-          {
-            "type": "STRING_PLAYER_STRING",
-            "command": "execute as %s at @p run %s",
-            "addition": "fill ~-1 ~3 ~-1 ~1 ~5 ~1 minecraft:lava"
-          }
-        ]
-      }
-    },
-    {
-      "events": {
-        "eventName": "Скелет з ефектом швидкості",
-        "icon": "minecraft:potion",
-        "price": {
-          "startSum": 51,
-          "endSum": 100
-        },
-        "commands": [
-          {
-            "type": "STRING_CORDS_STRING",
-            "command": "summon skeleton %d %d %d %s",
-            "addition": "{ActiveEffects:[{\"Id\":1,\"Amplifier\":1,\"Duration\":999999}],\"ArmorItems\":[{},{\"id\":\"minecraft:diamond_helmet\",\"Count\":1b},{\"id\":\"minecraft:diamond_chestplate\",\"Count\":1b},{\"id\":\"minecraft:diamond_leggings\",\"Count\":1b},{\"id\":\"minecraft:diamond_boots\",\"Count\":1b}],\"CustomName\":\"\\\"Скелет з ефектом швидкості\\\"\",\"HandItems\":[{\"id\":\"minecraft:bow\",\"Count\":1b,\"tag\":{\"Enchantments\":[{\"id\":\"minecraft:power\",\"lvl\":2}]}}]}"
-          }
-        ]
-      }
-    },
-    {
-      "events": {
-        "eventName": "Броньований Ведмідь",
-        "icon": "minecraft:diamond_chestplate",
-        "price": {
-          "startSum": 101,
-          "endSum": 150
-        },
-        "commands": [
-          {
-            "type": "STRING_CORDS_STRING",
-            "command": "summon polar_bear %d %d %d %s",
-            "addition": "{ArmorItems:[{},{\"id\":\"minecraft:netherite_helmet\",\"Count\":1b}],\"CustomName\":\"\\\"Броньований Ведмідь\\\"\",\"HandItems\":[{\"id\":\"minecraft:netherite_sword\",\"Count\":1b,\"tag\":{\"Enchantments\":[{\"id\":\"minecraft:fire_aspect\",\"lvl\":1}]}}]}"
-          }
-        ]
-      }
-    },
-    {
-      "events": {
-        "eventName": "Дракон з ефектом ночі",
-        "icon": "minecraft:dragon_head",
-        "price": {
-          "startSum": 151,
-          "endSum": 200
-        },
-        "commands": [
-          {
-            "type": "STRING_CORDS_STRING",
-            "command": "summon ender_dragon %d %d %d %s",
-            "addition": "{CustomName:\"\\\"Дракон з ефектом ночі\\\"\",\"ActiveEffects\":[{\"Id\":16,\"Amplifier\":0,\"Duration\":999999}],\"ArmorItems\":[{},{\"id\":\"minecraft:dragon_head\",\"Count\":1b}],\"HandItems\":[{\"id\":\"minecraft:flame\",\"Count\":1b}]}"
-          }
-        ]
-      }
-    },
-    {
-      "events": {
-        "eventName": "Нічний Зомбі",
-        "icon": "minecraft:coal_block",
-        "price": {
-          "startSum": 201,
-          "endSum": 300
-        },
-        "commands": [
-          {
-            "type": "STRING_CORDS_STRING",
-            "command": "summon zombie %d %d %d {\"CustomName\":\"\\\"Нічний Зомбі\\\"\",\"ActiveEffects\":[{\"Id\":15,\"Amplifier\":1,\"Duration\":999999}],\"Health\":40.0f,\"HandItems\":[{\"id\":\"minecraft:golden_sword\",\"Count\":1b,\"tag\":{\"Enchantments\":[{\"id\":\"minecraft:looting\",\"lvl\":3}]}}]}",
-            "addition": ""
-          }
-        ]
-      }
-    },
-    {
-      "events": {
-        "eventName": "Багато Слабких Зомбі",
+        "eventName": "Бейбі Злий Негр Зомбі",
         "icon": "minecraft:zombie_spawn_egg",
         "price": {
-          "startSum": 1,
-          "endSum": 50
+          "startSum": 0.0,
+          "endSum": 0.0
         },
         "commands": [
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @p run %s",
-            "addition": "summon minecraft:zombie ~ ~ ~2 {HandItems:[{id:\"minecraft:golden_sword\",Count:1b}],ActiveEffects:[{Id:12,Duration:999999,Amplifier:0},{Id:5,Duration:999999,Amplifier:1}]}"
+            "addition": "summon minecraft:zombie ~ ~ ~3 {IsBaby:1,CustomName:\u0027[{\"text\":\"Бейбі робочий\"}]\u0027,LeftHanded:1b,PersistenceRequired:1b,HandItems:[{id:stick,components:{enchantment_glint_override:true,enchantments:{levels:{knockback:5}}},count:1}],HandDropChances:[0f],ArmorItems:[{id:netherite_boots},{id:netherite_leggings},{id:netherite_chestplate},{id:dragon_head,components:{enchantment_glint_override:true},count:1}],ArmorDropChances:[0f,0f,0f,0f]}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "4 Секелета",
+        "icon": "minecraft:skeleton_spawn_egg",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon skeleton ~3 ~ ~ {active_effects:[{id:fire_resistance,duration:-1,amplifier:1,show_particles:0b}],HandItems:[{id:bow,components:{enchantments:{levels:{power:2,punch:2}}},count:1},{id:shield,count:1}],ArmorItems:[{},{},{},{id:wither_skeleton_skull,components:{enchantment_glint_override:true},count:1}],HandDropChances:[0f,0f],ArmorDropChances:[0f,0f,0f,0f]}"
           },
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @p run %s",
-            "addition": "summon minecraft:zombie ~ ~ ~-2 {HandItems:[{id:\"minecraft:golden_sword\",Count:1b}],ActiveEffects:[{Id:12,Duration:999999,Amplifier:0},{Id:5,Duration:999999,Amplifier:1}]}"
+            "addition": "summon skeleton ~-3 ~ ~ {active_effects:[{id:fire_resistance,duration:-1,amplifier:1,show_particles:0b}],HandItems:[{id:bow,components:{enchantments:{levels:{power:2,punch:2}}},count:1},{id:shield,count:1}],ArmorItems:[{},{},{},{id:wither_skeleton_skull,components:{enchantment_glint_override:true},count:1}],HandDropChances:[0f,0f],ArmorDropChances:[0f,0f,0f,0f]}"
           },
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @p run %s",
-            "addition": "summon minecraft:zombie ~2 ~ ~ {HandItems:[{id:\"minecraft:golden_sword\",Count:1b}],ActiveEffects:[{Id:12,Duration:999999,Amplifier:0},{Id:5,Duration:999999,Amplifier:1}]}"
+            "addition": "summon skeleton ~ ~ ~3 {active_effects:[{id:fire_resistance,duration:-1,amplifier:1,show_particles:0b}],HandItems:[{id:bow,components:{enchantments:{levels:{power:2,punch:2}}},count:1},{id:shield,count:1}],ArmorItems:[{},{},{},{id:wither_skeleton_skull,components:{enchantment_glint_override:true},count:1}],HandDropChances:[0f,0f],ArmorDropChances:[0f,0f,0f,0f]}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon skeleton ~ ~ ~-3 {active_effects:[{id:fire_resistance,duration:-1,amplifier:1,show_particles:0b}],HandItems:[{id:bow,components:{enchantments:{levels:{power:2,punch:2}}},count:1},{id:shield,count:1}],ArmorItems:[{},{},{},{id:wither_skeleton_skull,components:{enchantment_glint_override:true},count:1}],HandDropChances:[0f,0f],ArmorDropChances:[0f,0f,0f,0f]}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Спавн Кріпера",
+        "icon": "minecraft:creeper_spawn_egg",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon creeper ~ ~ ~2 {active_effects:[{id:levitation,duration:20,amplifier:2,show_particles:1b}]}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Спавн Візер Боса",
+        "icon": "minecraft:wither_rose",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon wither ~ ~1 ~5 {CustomName:\u0027[{\"text\":\"Помиральна машина\"}]\u0027,CustomNameVisible:1b,Glowing:1b}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Зомбя на оцелоті",
+        "icon": "minecraft:ocelot_spawn_egg",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon ocelot ~3 ~ ~3 {Health:40,attributes:[{id:\"generic.movement_speed\",base:0.5f},{id:\"generic.max_health\",base:40f}],Passengers:[{id:zombie,HandItems:[{id:stick,components:{enchantment_glint_override:true,enchantments:{levels:{knockback:3}}},count:1}],ArmorItems:[{},{},{},{id:orange_stained_glass,count:1}],HandDropChances:[0f],ArmorDropChances:[0f,0f,0f,0f]}]}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Біг Слайм",
+        "icon": "minecraft:slime_ball",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon slime ~-5 ~3 ~-5 {Size:5,wasOnGround:1,Glowing:1b,active_effects:[{id:absorption,show_particles:0b}]}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Вівця Звичайна",
+        "icon": "minecraft:sheep_spawn_egg",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~2.7 ~ ~ {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~-2.7 ~ ~ {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~ ~ ~2.7 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~ ~ ~-2.7 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~2 ~ ~2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~2 ~ ~-2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~-2 ~ ~-2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon sheep ~-2 ~ ~2 {InLove:1b}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Свиня Звичайна",
+        "icon": "minecraft:pig_spawn_egg",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon pig ~2 ~ ~2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon pig ~2 ~ ~-2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon pig ~-2 ~ ~-2 {InLove:1b}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon pig ~-2 ~ ~2 {InLove:1b}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Лавакаст пастка",
+        "icon": "minecraft:lava_bucket",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "fill ~2 ~5 ~2 ~-2 ~9 ~-2 minecraft:lava"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "fill ~2 ~ ~2 ~-2 ~-4 ~-2 air"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "fill ~2 ~-5 ~2 ~-2 ~-5 ~-2 minecraft:cobweb"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "setblock ~ ~-1 ~ minecraft:grass_block"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Яма пастка",
+        "icon": "minecraft:feather",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "fill ~ ~ ~ ~ -64 ~ minecraft:air"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "setblock ~ -64 ~ minecraft:cobweb"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "setblock ~ -63 ~ minecraft:cobweb"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Тп на 200 блоків вверх",
+        "icon": "minecraft:shulker_box",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "tp ~ ~200 ~"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Інстант ДМГ",
+        "icon": "minecraft:crying_obsidian",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "effect give @s minecraft:instant_damage 1 1"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Йобнута стріла",
+        "icon": "minecraft:arrow",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "title @s title \"Ой а де твоє молочко?\""
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "effect give @s minecraft:slowness 5 255"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "effect give @s minecraft:mining_fatigue 5 255"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "fill ~1 ~ ~1 ~-1 ~160 ~-1 air"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "setblock ~ ~ ~ minecraft:cobweb"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon minecraft:arrow ~ ~10 ~"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Фаєр боли в боки",
+        "icon": "minecraft:fire_charge",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon fireball ~ ~1 ~ {Motion:[0.0,-0.3,-1.0],ExplosionPower:2}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon fireball ~ ~1 ~ {Motion:[0.0,-0.3,1.0],ExplosionPower:2}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon fireball ~ ~1 ~ {Motion:[1.0,-0.3,0.0],ExplosionPower:2}"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon fireball ~ ~1 ~ {Motion:[-1.0,-0.3,0.0],ExplosionPower:2}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "ПИЗДЕЦЬ НАХУЙ ФАЄРБОЛ",
+        "icon": "minecraft:fire_charge",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "summon fireball ~ ~2 ~ {ExplosionPower:75}"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Діамантовий блок",
+        "icon": "minecraft:diamond_block",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "setblock ~ ~-1 ~ minecraft:diamond_block"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Золоте яблоко",
+        "icon": "minecraft:golden_apple",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @s minecraft:golden_apple"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Золоте зачароване яблоко",
+        "icon": "minecraft:enchanted_golden_apple",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @s minecraft:enchanted_golden_apple"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Додаткове хп",
+        "icon": "minecraft:apple",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "effect give @s minecraft:health_boost 120 9"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "effect give @s minecraft:instant_health 1 10"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Тризуб + політ",
+        "icon": "minecraft:trident",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p trident[enchantments\u003d{levels:{channeling:1,riptide:3}}]"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "weather thunder"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Приємне кайло",
+        "icon": "minecraft:diamond_pickaxe",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p diamond_pickaxe[enchantments\u003d{levels:{efficiency:5,fortune:10}}]"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Тотем",
+        "icon": "minecraft:totem_of_undying",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:totem_of_undying"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Залізний сет",
+        "icon": "minecraft:iron_chestplate",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:iron_helmet"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:iron_chestplate"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:iron_leggings"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:iron_boots"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Діамантовий сет",
+        "icon": "minecraft:diamond_chestplate",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:diamond_helmet"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:diamond_chestplate"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:diamond_leggings"
+          },
+          {
+            "type": "STRING_PLAYER_STRING",
+            "command": "execute as %s at @p run %s",
+            "addition": "give @p minecraft:diamond_boots"
+          }
+        ]
+      }
+    },
+    {
+      "events": {
+        "eventName": "Перемішати інвентар",
+        "icon": "minecraft:structure_block",
+        "price": {
+          "startSum": 0.0,
+          "endSum": 0.0
+        },
+        "commands": [
+          {
+            "type": "CUSTOM_EVENT",
+            "command": "inventoryShake",
+            "addition": ""
           }
         ]
       }
     }
   ]
 }
-

@@ -22,15 +22,15 @@ public class CustomMenu implements Listener {
 
     public CustomMenu(DonationEvents plugin) {
         this.plugin = plugin;
-        this.inventory = Bukkit.createInventory(null, 54, ChatColor.DARK_PURPLE + "Редагування івентів");
         initializeMenu();
     }
 
     private void initializeMenu() {
+        inventory = null;
+        this.inventory = Bukkit.createInventory(null, 54, ChatColor.DARK_PURPLE + "Редагування івентів");
         int count = 1;
         for (EventsArrays event : plugin.eventsArraysList){
             ItemStack item = createItem(event, count);
-            plugin.getLogger().info("Item: " + item);
             inventory.setItem(count - 1, item);
             count++;
         }
@@ -133,6 +133,7 @@ public class CustomMenu implements Listener {
         back.setItemMeta(backMeta);
         editMenu.setItem(0, back);
 
+        initializeMenu();
         player.openInventory(editMenu);
     }
 
