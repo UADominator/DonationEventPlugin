@@ -27,24 +27,6 @@ public class DonatelloAPI {
         this.plugin = plugin;
     }
 
-//    public void checkForNewDonations() {
-//        String token = plugin.api.getAPIkey(2);
-//        getJsonDonators(token).thenAccept(json -> {
-//            if (json != null) {
-//                JSONArray donations = new JSONObject(json).getJSONArray("content");
-//                if (donations.length() > 0) {
-//                    JSONObject lastDonation = donations.getJSONObject(0);
-//                    String donationId = lastDonation.getString("createdAt");
-//                    String clientName = lastDonation.getString("clientName");
-//                    String amount = lastDonation.getString("amount");
-//                    String message = lastDonation.optString("message", "");
-//
-//                    Bukkit.broadcastMessage(clientName + " " + amount + ". \n" + message);
-//                    }
-//            }
-//        });
-//    }
-
     /**
      *
      * @param token

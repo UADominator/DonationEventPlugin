@@ -9,6 +9,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -232,6 +233,15 @@ public class CustomMenu implements Listener {
                     }
                 }, plugin);
             }
+        }
+    }
+
+    //TODO: move to other class
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        if (plugin.api.donatelloAPIkey.equals("change me") || plugin.api.donatelloAPIkey.equals("")){
+            event.getPlayer().sendMessage("§l§8Встанови АПІ ключ §3Donatello §4/setAPIKey §ствійБлятьAPI§4 2§r");
+            event.getPlayer().sendMessage("§7Або якщо ти мамкін §l§8хацкер§7 заміни його в конфігу: §9../plugins/DonationEvents/config.yml§7 заміни §4change me§7 на свій АПІ ключ");
         }
     }
 }

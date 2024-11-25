@@ -12,7 +12,7 @@ import org.dominator.donationEvents.events.CustomEventHandler;
 import org.dominator.donationEvents.events.EventsArrays;
 import org.dominator.donationEvents.lastDonators.DonationsInformation;
 import org.dominator.donationEvents.menu.CustomMenu;
-import org.dominator.donationEvents.workWithApi.APIMenager;
+import org.dominator.donationEvents.workWithApi.APIManager;
 import org.dominator.donationEvents.workWithApi.APIusageType.DonatelloAPI;
 import org.dominator.donationEvents.workWithApi.APIusageType.DyakaAPI;
 import org.dominator.donationEvents.workWithApi.APIusageType.MonobankAPI;
@@ -26,10 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 
 public final class DonationEvents extends JavaPlugin {
-    public APIMenager api = new APIMenager();
+    public APIManager api = new APIManager();
     public DyakaAPI dyakaAPI;
     public DonatelloAPI donatelloAPI;
     public MonobankAPI monobankAPI;
@@ -57,13 +58,13 @@ public final class DonationEvents extends JavaPlugin {
 
         saveResource("usage.txt", true);
 
+        saveResource("events.json", false);
         jsonFile = new File(getDataFolder(), "events.json");
         if (!jsonFile.exists()) {
             try {
                 jsonFile.getParentFile().mkdirs();
                 jsonFile.createNewFile();
                 eventsArraysList = new ArrayList<>();
-                saveJsonFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -123,10 +124,10 @@ public final class DonationEvents extends JavaPlugin {
                 new DonationsInformation.DateTime(donationJson.get("createdAt").getAsString()).isOlder(startTime)
                 ) {
                 if (donationsInformation.size() == 10 ) {
-                    donationsInformation.remove(0);
+                    donationsInformation.removeFirst();
                 }
                 donationsInformation.add(new DonationsInformation(donationJson));
-                DonationEvents.this.getLogger().info("Додано донат: " + contentArray.get(i).getAsJsonObject().toString());
+                DonationEvents.this.getLogger().info("Додано донат: Ім'я: `"+ donationsInformation.getLast().getName() + "` Сума: `" + donationsInformation.getLast().getAmount() + "` Повідовлення: `" + donationsInformation.getLast().getMessage() + "` Час створення: `" + donationsInformation.getFirst().getDateTimeString() + "`");
 
                 String createdAt = donationJson.get("createdAt").getAsString();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -135,10 +136,14 @@ public final class DonationEvents extends JavaPlugin {
 
                 // Вираховуємо різницю в мілісекундах між поточним часом і часом створення донату
                 long delay = ChronoUnit.MILLIS.between(currentTime, createdAtTime.plusSeconds(20));
-
+                this.getLogger().info("Затримка до обробки" + delay / 1000.0 + " с.");
                 if (delay < 0) {
                     delay = 0;
                 }
+                if (delay > 20000){
+                    delay = new Random().nextInt(19999);
+                }
+                this.getLogger().info("Затримка після обробки " + delay / 1000.0 + " с.");
 
                 Bukkit.getScheduler().runTaskLater(this, () -> {
                     this.getLogger().info("Викликано івенти");
@@ -177,4 +182,5 @@ public final class DonationEvents extends JavaPlugin {
         saveJsonFile();
         getLogger().info("DonationEvents плагін вимкнено.");
     }
+
 }

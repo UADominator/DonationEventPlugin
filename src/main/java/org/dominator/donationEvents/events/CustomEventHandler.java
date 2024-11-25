@@ -17,7 +17,7 @@ public class CustomEventHandler {
     }
 
     public void eventsCrossroads(double amount) {
-        plugin.getLogger().info("Вхідна сума: " + amount);
+        plugin.getLogger().info("Обробка суми: " + amount);
 
 
         List<EventsArrays> newEvents = new ArrayList<>();
@@ -48,57 +48,50 @@ public class CustomEventHandler {
     }
 
     public void commandUseStringCordsString(EventsArrays.Events.Commands command){
-        Player play = getFirstOnlinePlayer();
-        Location location = play.getLocation();
-        int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
+        for (Player play : Bukkit.getOnlinePlayers()) {
+            Location location = play.getLocation();
+            int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
 
-        String newCommand = String.format(command.command,  x, y, z, command.addition);
+            String newCommand = String.format(command.command, x, y, z, command.addition);
 
-        plugin.getLogger().info("Викликав команду " + newCommand);
+            plugin.getLogger().info("Викликав команду " + newCommand);
 
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
+            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
+        }
     }
 
     public void commandUseStringPlayerString(EventsArrays.Events.Commands command){
-        Player play = getFirstOnlinePlayer();
+        for (Player play : Bukkit.getOnlinePlayers()) {
 
-        String newCommand = String.format(command.command, play.getName(), command.addition);
+            String newCommand = String.format(command.command, play.getName(), command.addition);
 
-        plugin.getLogger().info("Викликав команду " + newCommand);
+            plugin.getLogger().info("Викликав команду " + newCommand);
 
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
-
+            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
+        }
     }
 
     public void commandUseStringPlayerCordsString(EventsArrays.Events.Commands command){
-        Player play = getFirstOnlinePlayer();
-        Location location = play.getLocation();
-        int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
+        for (Player play : Bukkit.getOnlinePlayers()) {
+            Location location = play.getLocation();
+            int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
 
-        String newCommand = String.format(command.command, play,  x, y, z, command.addition);
+            String newCommand = String.format(command.command, play, x, y, z, command.addition);
 
-        plugin.getLogger().info("Викликав команду " + newCommand);
+            plugin.getLogger().info("Викликав команду " + newCommand);
 
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
-
+            plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
+        }
     }
 
     public void commandUseCustomEvent(EventsArrays.Events.Commands command){
         // TODO: тут тре буде ще щось
         switch (command.command){
-            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
-//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
-//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
-//            case "inventoryShake" -> shuffleInventory(getFirstOnlinePlayer());
-        }
-    }
-
-    public Player getFirstOnlinePlayer() {
-        Player[] onlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[0]);
-        if (onlinePlayers.length > 0) {
-            return  onlinePlayers[0];
-        } else {
-            return null;
+            case "inventoryShake" -> {
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    shuffleInventory(player);
+                }
+            }
         }
     }
 

@@ -1,17 +1,17 @@
 package org.dominator.donationEvents.workWithApi;
 
-public class APIMenager {
+public class APIManager {
     public String dyakaAPIkey;
     public String donatelloAPIkey;
     public String monoAPIkey;;
 
-    public APIMenager(){
+    public APIManager(){
         dyakaAPIkey = "";
         donatelloAPIkey = "";
         monoAPIkey = "";
     }
 
-    public APIMenager(String APIkey, int keyType) {
+    public APIManager(String APIkey, int keyType) {
         setAPIkey(APIkey, keyType);
     }
 
