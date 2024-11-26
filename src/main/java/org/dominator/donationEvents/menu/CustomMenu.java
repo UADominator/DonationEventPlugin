@@ -97,6 +97,7 @@ public class CustomMenu implements Listener {
                     plugin.acceptEvents = !plugin.acceptEvents;
                     initializeMenu();
                     event.getWhoClicked().openInventory(inventory);
+                    return;
                 }
 
                 for (EventsArrays eventArray : plugin.eventsArraysList) {
@@ -154,7 +155,7 @@ public class CustomMenu implements Listener {
         editMenu.setItem(0, back);
 
         initializeMenu();
-        player.openInventory(inventory);
+        player.openInventory(editMenu);
     }
 
     @EventHandler
