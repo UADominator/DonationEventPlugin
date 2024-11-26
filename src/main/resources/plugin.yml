@@ -1,5 +1,5 @@
 name: DonationEvents
-version: '1.0'
+version: '1.0.1'
 main: org.dominator.donationEvents.DonationEvents
 api-version: '1.21'
 authors: [ Dominator ]
@@ -7,24 +7,34 @@ commands:
   lastDonations:
     description: Показати останні донати.
     usage: /lastdonations
-    permission: donationevents.view
+    permission: donationEvents.view
 
   setAPIkey:
     description: Встановити АПІ ключ.
     usage: /setAPIkey
-    permission: setAPIKey
+    permission: donationEvents.setAPIKey
 
   openSettingsMenu:
     description: Відкрити меню налаштування.
     usage: /openSettingsMenu
-    permission: openSettingsMenu
+    permission: donationEvents.openSettingsMenu
 
   randEventSum:
     description: Випадковий івент із сумою N.
     usage: /randEventSum
-    permission: randEventSum
+    permission: donationEvents.randEventSum
 
   reloadEvents:
     description: Завантажити івенти із файлу.
     usage: /loadEvents
-    permission: loadEvents
+    permission: donationEvents.loadEvents
+
+permissions:
+  donationEvents:
+    default: true
+
+  donationEvents.openSettingsMenu:
+    default: true
+
+  donationEvents.randEventSum:
+    default: true

@@ -35,6 +35,20 @@ public class CustomMenu implements Listener {
             inventory.setItem(count - 1, item);
             count++;
         }
+
+        ItemStack iventsState;
+        if (plugin.acceptEvents){
+            iventsState = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+            ItemMeta metaIventsState = iventsState.getItemMeta();
+            metaIventsState.setDisplayName(ChatColor.GREEN + "Вимкнути / Івенти ввімкнено");
+            iventsState.setItemMeta(metaIventsState);
+        } else {
+            iventsState = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+            ItemMeta metaIventsState = iventsState.getItemMeta();
+            metaIventsState.setDisplayName(ChatColor.DARK_RED + "Ввімкнути / Івенти вимкнено");
+            iventsState.setItemMeta(metaIventsState);
+        }
+        inventory.setItem(49, new ItemStack(iventsState));
     }
 
 
@@ -79,6 +93,11 @@ public class CustomMenu implements Listener {
             ItemStack clickedItem = event.getCurrentItem();
             if (clickedItem != null && clickedItem.hasItemMeta()) {
                 String itemName = clickedItem.getItemMeta().getDisplayName();
+                if (itemName.equals(ChatColor.DARK_RED + "Ввімкнути / Івенти вимкнено") || itemName.equals(ChatColor.GREEN + "Вимкнути / Івенти ввімкнено")){
+                    plugin.acceptEvents = !plugin.acceptEvents;
+                    initializeMenu();
+                    event.getWhoClicked().openInventory(inventory);
+                }
 
                 for (EventsArrays eventArray : plugin.eventsArraysList) {
                     if (eventArray.events.eventName.equals(itemName)) {
@@ -135,7 +154,7 @@ public class CustomMenu implements Listener {
         editMenu.setItem(0, back);
 
         initializeMenu();
-        player.openInventory(editMenu);
+        player.openInventory(inventory);
     }
 
     @EventHandler

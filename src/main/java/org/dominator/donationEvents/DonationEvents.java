@@ -44,6 +44,7 @@ public final class DonationEvents extends JavaPlugin {
     private Gson gson;
     public List<EventsArrays> eventsArraysList;
 
+    public boolean acceptEvents = false;
 
     public OpenSettingsMenu openSettingsMenu = new OpenSettingsMenu(this);
 
@@ -99,17 +100,21 @@ public final class DonationEvents extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
-                donatelloAPI.getJsonDonators(api.getAPIkey(2)).thenAccept(response -> {
-                    if (response != null) {
-                        addDonate(response);
-                    }
-                }).exceptionally(throwable -> {
-                    DonationEvents.this.getLogger().info("Виникла помилка при отриманні донатів: " + throwable.getMessage());
-                    return null;
-                });
-
+                if (acceptEvents) {
+                    donatelloAPI.getJsonDonators(api.getAPIkey(2)).thenAccept(response -> {
+                        if (response != null) {
+                            addDonate(response);
+                        }
+                    }).exceptionally(throwable -> {
+                        DonationEvents.this.getLogger().info("Виникла помилка при отриманні донатів: " + throwable.getMessage());
+                        return null;
+                    });
+                } else {
+                    DonationEvents.this.getLogger().info("Отримання донатів ВИМКНЕННО");
+                }
             }
         }.runTaskTimer(this, 0L, 20L * 20);
+
     }
 
 
