@@ -105,6 +105,9 @@ public class CustomEventHandler {
                 //for (Player player : Bukkit.getOnlinePlayers()){
                     shuffleInventory(play);
                 }
+            case "manyEvents" -> {
+
+            }
         }
     }
 
@@ -134,5 +137,11 @@ public class CustomEventHandler {
         for (int i = inventoryItems.size(); i < inventoryContents.length; i++) {
             player.getInventory().setItem(i, null);
         }
+    }
+
+    public void manyRandDonations(float sum){
+        plugin.getLogger().info("Перемішую інвентар");
+        eventsCrossroads(10); //TODO: rand sum
+
     }
 }
