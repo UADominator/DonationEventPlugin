@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.dominator.donationEvents.DonationEvents;
 
 public class CustomEventHandler {
+
     private final DonationEvents plugin;
 
     public CustomEventHandler(DonationEvents plugin){
@@ -48,7 +49,11 @@ public class CustomEventHandler {
     }
 
     public void commandUseStringCordsString(EventsArrays.Events.Commands command){
-        for (Player play : Bukkit.getOnlinePlayers()) {
+        //for (Player play : Bukkit.getOnlinePlayers()) {
+            Player play = Bukkit.getOnlinePlayers().stream()
+                    .filter(player -> player.getName().equalsIgnoreCase("Kvadratnyk")) // TODO: Horfixed execute only Kva
+                    .findFirst()
+                    .orElse(null);
             Location location = play.getLocation();
             int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
 
@@ -57,49 +62,55 @@ public class CustomEventHandler {
             plugin.getLogger().info("Викликав команду " + newCommand);
 
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
-        }
+        //}
     }
 
     public void commandUseStringPlayerString(EventsArrays.Events.Commands command){
-        for (Player play : Bukkit.getOnlinePlayers()) {
+        //for (Player play : Bukkit.getOnlinePlayers()) {
+            Player play = Bukkit.getOnlinePlayers().stream()
+                    .filter(player -> player.getName().equalsIgnoreCase("Kvadratnyk")) // TODO: Horfixed execute only Kva
+                    .findFirst()
+                    .orElse(null);
 
             String newCommand = String.format(command.command, play.getName(), command.addition);
-
             plugin.getLogger().info("Викликав команду " + newCommand);
-
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
-        }
+        //}
     }
 
     public void commandUseStringPlayerCordsString(EventsArrays.Events.Commands command){
-        for (Player play : Bukkit.getOnlinePlayers()) {
+        //for (Player play : Bukkit.getOnlinePlayers()) {
+        Player play = Bukkit.getOnlinePlayers().stream()
+                .filter(player -> player.getName().equalsIgnoreCase("Kvadratnyk")) // TODO: Horfixed execute only Kva
+                .findFirst()
+                .orElse(null);
+
             Location location = play.getLocation();
             int x = location.getBlockX(), y = location.getBlockY(), z = location.getBlockZ();
 
             String newCommand = String.format(command.command, play, x, y, z, command.addition);
-
             plugin.getLogger().info("Викликав команду " + newCommand);
-
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), newCommand);
-        }
+        //}
     }
 
     public void commandUseCustomEvent(EventsArrays.Events.Commands command){
         // TODO: тут тре буде ще щось
         switch (command.command){
             case "inventoryShake" -> {
-                for (Player player : Bukkit.getOnlinePlayers()){
-                    shuffleInventory(player);
+                Player play = Bukkit.getOnlinePlayers().stream()
+                        .filter(player -> player.getName().equalsIgnoreCase("Kvadratnyk")) // TODO: Horfixed execute only Kva
+                        .findFirst()
+                        .orElse(null);
+                //for (Player player : Bukkit.getOnlinePlayers()){
+                    shuffleInventory(play);
                 }
-            }
         }
     }
 
     public int getRandInt(int endInt){
         return new Random().nextInt(endInt);
     }
-
-
 
 
     ///////////////////////CUSTOM EVENTS//////////////////////////////////

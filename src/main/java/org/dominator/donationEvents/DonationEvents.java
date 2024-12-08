@@ -35,6 +35,7 @@ public final class DonationEvents extends JavaPlugin {
     public DonatelloAPI donatelloAPI;
     public MonobankAPI monobankAPI;
 
+
     public CustomEventHandler customEventHandler;
 
     public List<DonationsInformation> donationsInformation = new ArrayList<>(10);
@@ -52,7 +53,8 @@ public final class DonationEvents extends JavaPlugin {
     public void onEnable() {
         getLogger().info("DonationEvents плагін увімкнено!");
 
-        startTime = new DonationsInformation.DateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        startTime = new DonationsInformation.DateTime(LocalDateTime.now().plusHours(1)./*TODO: hotfixed change local time for -1 h from Kyiv*/format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
         DonationEvents.this.getLogger().info("Час запуску серверу: " + startTime.toString());
 
         gson = new GsonBuilder().setPrettyPrinting().create();
@@ -137,7 +139,7 @@ public final class DonationEvents extends JavaPlugin {
                 String createdAt = donationJson.get("createdAt").getAsString();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime createdAtTime = LocalDateTime.parse(createdAt, formatter);
-                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDateTime currentTime = LocalDateTime.now().plusHours(1); //TODO: hotfixed change local time for -1 h from Kyiv
 
                 // Вираховуємо різницю в мілісекундах між поточним часом і часом створення донату
                 long delay = ChronoUnit.MILLIS.between(currentTime, createdAtTime.plusSeconds(20));

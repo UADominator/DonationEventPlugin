@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class DonationsInformation {
     private final Double amount;
@@ -55,9 +56,16 @@ public class DonationsInformation {
     }
 
     @Override
-    public boolean equals(Object  obj){
-        DonationsInformation other = (DonationsInformation) obj;
-        return this.dateTime.isEqual(other.getDateTime());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DonationsInformation that = (DonationsInformation) o;
+        return Objects.equals(amount, that.amount) && Objects.equals(name, that.name) && Objects.equals(message, that.message) && Objects.equals(dateTime, that.dateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount, name, message, dateTime);
     }
 
     public static class DateTime {
@@ -86,6 +94,19 @@ public class DonationsInformation {
             this.hour = hour;
             this.minute = minute;
             this.seconds = seconds;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DateTime dateTime = (DateTime) o;
+            return year == dateTime.year && month == dateTime.month && day == dateTime.day && hour == dateTime.hour && minute == dateTime.minute && seconds == dateTime.seconds;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(year, month, day, hour, minute, seconds);
         }
 
         public boolean isOlder(DateTime other){
