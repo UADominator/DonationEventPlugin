@@ -37,7 +37,7 @@ public class CustomMenu implements Listener {
         }
 
         ItemStack iventsState;
-        if (plugin.acceptEvents){
+        if (DonationEvents.acceptEvents){
             iventsState = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
             ItemMeta metaIventsState = iventsState.getItemMeta();
             metaIventsState.setDisplayName(ChatColor.GREEN + "Вимкнути / Івенти ввімкнено");
@@ -94,9 +94,10 @@ public class CustomMenu implements Listener {
             if (clickedItem != null && clickedItem.hasItemMeta()) {
                 String itemName = clickedItem.getItemMeta().getDisplayName();
                 if (itemName.equals(ChatColor.DARK_RED + "Ввімкнути / Івенти вимкнено") || itemName.equals(ChatColor.GREEN + "Вимкнути / Івенти ввімкнено")){
-                    plugin.acceptEvents = !plugin.acceptEvents;
+                    DonationEvents.acceptEvents = !DonationEvents.acceptEvents;
                     initializeMenu();
                     event.getWhoClicked().openInventory(inventory);
+                    plugin.updateStartTime();
                     return;
                 }
 

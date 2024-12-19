@@ -35,27 +35,27 @@ public final class DonationEvents extends JavaPlugin {
     public DonatelloAPI donatelloAPI;
     public MonobankAPI monobankAPI;
 
-
-    public CustomEventHandler customEventHandler;
-
-    public List<DonationsInformation> donationsInformation = new ArrayList<>(10);
-    public DonationsInformation.DateTime startTime;
-
     private File jsonFile;
     private Gson gson;
-    public List<EventsArrays> eventsArraysList;
-
-    public boolean acceptEvents = false;
 
     public OpenSettingsMenu openSettingsMenu = new OpenSettingsMenu(this);
+
+    public CustomEventHandler customEventHandler;
+    public List<DonationsInformation> donationsInformation = new ArrayList<>(10);
+    public List<EventsArrays> eventsArraysList;
+
+    public static boolean acceptEvents = true;
+    public static boolean useTargetName = false;
+    public static DonationsInformation.DateTime startTime;
+    public static String targetName = "";
+
+
 
     @Override
     public void onEnable() {
         getLogger().info("DonationEvents плагін увімкнено!");
 
-        startTime = new DonationsInformation.DateTime(LocalDateTime.now().plusHours(1)./*TODO: hotfixed change local time for -1 h from Kyiv*/format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
-        DonationEvents.this.getLogger().info("Час запуску серверу: " + startTime.toString());
+        updateStartTime(); //Set zero point
 
         gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -77,6 +77,8 @@ public final class DonationEvents extends JavaPlugin {
 
         saveDefaultConfig();
 
+        targetName = getConfig().getString("settings.targetName"); //Use event only for this player
+        useTargetName = getConfig().getBoolean("settings.useTargetName"); //Use event only for one player
 
         api.setAPIkey(getConfig().getString("settings.dyakaAPI"), 1);
         api.setAPIkey(getConfig().getString("settings.donatelloAPI"), 2);
@@ -96,6 +98,12 @@ public final class DonationEvents extends JavaPlugin {
         this.getCommand("randEventSum").setExecutor(new StartRandEvent(this));
         this.getCommand("reloadEvents").setExecutor(new ReLoadEvents(this));
         getServer().getPluginManager().registerEvents(new CustomMenu(this), this);
+    }
+
+    public void updateStartTime(){
+        startTime = new DonationsInformation.DateTime(LocalDateTime.now().plusHours(1)./*TODO: hotfixed change local time for -1 h from Kyiv*/format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+        DonationEvents.this.getLogger().info("Час запуску серверу: " + startTime.toString());
     }
 
     public void startDonationCheckTask() {
@@ -134,7 +142,7 @@ public final class DonationEvents extends JavaPlugin {
                     donationsInformation.removeFirst();
                 }
                 donationsInformation.add(new DonationsInformation(donationJson));
-                DonationEvents.this.getLogger().info("Додано донат: Ім'я: `"+ donationsInformation.getLast().getName() + "` Сума: `" + donationsInformation.getLast().getAmount() + "` Повідовлення: `" + donationsInformation.getLast().getMessage() + "` Час створення: `" + donationsInformation.getFirst().getDateTimeString() + "`");
+                DonationEvents.this.getLogger().info("Додано донат: Ім'я: `"+ donationsInformation.getLast().getName() + "` Сума: `" + donationsInformation.getLast().getAmount() + "` Повідовлення: `" + donationsInformation.getLast().getMessage() + "` Час створення: `" + donationsInformation.getLast().getDateTimeString() + "`");
 
                 String createdAt = donationJson.get("createdAt").getAsString();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -144,12 +152,10 @@ public final class DonationEvents extends JavaPlugin {
                 // Вираховуємо різницю в мілісекундах між поточним часом і часом створення донату
                 long delay = ChronoUnit.MILLIS.between(currentTime, createdAtTime.plusSeconds(20));
                 this.getLogger().info("Затримка до обробки" + delay / 1000.0 + " с.");
-                if (delay < 0) {
-                    delay = 0;
-                }
-                if (delay > 20000){
+                if (delay < 0 || delay > 20000) {
                     delay = new Random().nextInt(19999);
                 }
+
                 this.getLogger().info("Затримка після обробки " + delay / 1000.0 + " с.");
 
                 Bukkit.getScheduler().runTaskLater(this, () -> {

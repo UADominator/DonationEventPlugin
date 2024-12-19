@@ -2,4 +2,5 @@ settings:
   dyakaAPI: "change me"
   donatelloAPI: "change me"
   monoAPI: "change me"
-  playerOnly: "Kvadratnyk"
+  useTargetName: true
+  targetName: "Kvadratnyk"

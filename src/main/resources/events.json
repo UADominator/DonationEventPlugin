@@ -330,7 +330,7 @@
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @s run %s",
-            "addition": "setblock ~ ~10 ~ pointed_dripstone[vertical_direction=down]"
+            "addition": "setblock ~ ~10 ~ pointed_dripstone[vertical_direction\u003ddown]"
           }
         ]
       }
@@ -509,7 +509,7 @@
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @s run %s",
-            "addition": "give @p trident[enchantments\u003d{levels:{channeling:1,riptide:3}},damage=249]"
+            "addition": "give @p trident[enchantments\u003d{levels:{channeling:1,riptide:3}},damage\u003d249]"
           },
           {
             "type": "STRING_PLAYER_STRING",
@@ -578,8 +578,8 @@
         "eventName": "Блискавки",
         "icon": "minecraft:lightning_rod",
         "price": {
-          "startSum": 0.0,
-          "endSum": 50.0
+          "startSum": 50.0,
+          "endSum": 100.0
         },
         "commands": [
           {
