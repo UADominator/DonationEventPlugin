@@ -29,11 +29,11 @@ public class APIManager {
             case 1 -> dyakaAPIkey;
             case 2 -> donatelloAPIkey;
             case 3 -> monoAPIkey;
-            default -> "PIZDA";
+            default -> "ПТН";
         };
     }
 
     public String getAPIkey() {
-        return "DAUN";
+        return "ПНХ";
     }
 }
