@@ -18,8 +18,7 @@ public class OpenSettingsMenu implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (sender instanceof Player player) {
             CustomMenu menu = new CustomMenu(plugin);
             player.openInventory(menu.getInventory());
             return true;
