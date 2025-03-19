@@ -6,7 +6,7 @@ authors: [ Dominator ]
 commands:
   lastDonations:
     description: Показати останні донати.
-    usage: /lastdonations
+    usage: /lastDonats
     permission: donationEvents.view
 
   setAPIkey:
