@@ -1,7 +1,5 @@
 package org.dominator.donationEvents.events;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +10,7 @@ public class EventsArrays {
         return events.price.startSum <= priceOth && priceOth <= events.price.endSum;
     }
 
-    public static  class Events {
+    public static class Events {
         public String eventName;
         public String icon;
         public Price price;

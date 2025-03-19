@@ -5,24 +5,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.dominator.donationEvents.DonationEvents;
 import org.dominator.donationEvents.menu.CustomMenu;
 
 public class OpenSettingsMenu implements CommandExecutor {
-    private final DonationEvents plugin;
-
-    public OpenSettingsMenu(DonationEvents plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
         if (sender instanceof Player player) {
-            CustomMenu menu = new CustomMenu(plugin);
-            player.openInventory(menu.getInventory());
+            player.openInventory(CustomMenu.getInventory());
             return true;
         }
+
         sender.sendMessage(ChatColor.RED + "Цю команду можна використовувати тільки гравцями!");
         return false;
     }

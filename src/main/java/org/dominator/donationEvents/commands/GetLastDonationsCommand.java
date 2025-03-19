@@ -3,16 +3,10 @@ package org.dominator.donationEvents.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.dominator.donationEvents.DonationEvents;
+import org.dominator.donationEvents.useAPI.APIManager;
+import org.dominator.donationEvents.useAPI.DonatelloAPI;
 
 public class GetLastDonationsCommand implements CommandExecutor {
-
-    private final DonationEvents plugin;
-
-    public GetLastDonationsCommand(DonationEvents plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("donationevents.view")) {
@@ -20,13 +14,13 @@ public class GetLastDonationsCommand implements CommandExecutor {
             return false;
         }
 
-        String  token = plugin.api.getAPIkey(2);
+        String  token = APIManager.getAPIkey(1);
         if (token == null) {
-            plugin.getLogger().severe("Токен для Donatello API == null.");
+            System.out.println("Токен для Donatello API == null.");
             return false;
         }
 
-        plugin.donatelloAPI.getJsonDonators(token).thenAccept(response -> {
+        DonatelloAPI.getJsonDonators(token).thenAccept(response -> {
             if (response != null) {
                 sender.sendMessage(response);
             } else {

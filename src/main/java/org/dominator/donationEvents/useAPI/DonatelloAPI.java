@@ -1,6 +1,4 @@
-package org.dominator.donationEvents.workWithApi.APIusageType;
-
-import org.dominator.donationEvents.DonationEvents;
+package org.dominator.donationEvents.useAPI;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,20 +7,12 @@ import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
 public class DonatelloAPI {
-
-    private final DonationEvents plugin;
-
-    public DonatelloAPI(DonationEvents plugin) {
-        this.plugin = plugin;
-    }
-
     /**
      *
      * @param token
      * @return json list of 10 last donators
      */
-
-    public CompletableFuture<String> getJsonDonators(String token) {
+    public static CompletableFuture<String> getJsonDonators(String token) {
         String baseUrl = "https://donatello.to/api/v1/donates";
         int size = 10;
 
@@ -43,16 +33,16 @@ public class DonatelloAPI {
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
                     if (response.statusCode() == 401) {
-                        plugin.getLogger().severe("Помилка авторизації. Неправильний токен.");
+                        System.out.println("Помилка авторизації. Неправильний токен.");
                         return null;
                     }
 
-                    plugin.getLogger().info("Донати успішно отримані");
+                    System.out.println("Донати успішно отримані");
                     return response.body();
                 })
                 .handle((responseBody, throwable) -> {
                     if (throwable != null) {
-                        plugin.getLogger().severe("Помилка при отриманні донатів: " + throwable.getMessage());
+                        System.out.println("Помилка при отриманні донатів: " + throwable.getMessage());
                     }
                     return responseBody;
                 });

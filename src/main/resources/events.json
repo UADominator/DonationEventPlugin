@@ -119,7 +119,7 @@
     },
     {
       "events": {
-        "eventName": "Глоустоун Пеніс",
+        "eventName": "Глоустоун ракета",
         "icon": "minecraft:glowstone",
         "price": {
           "startSum": 20.0,
@@ -347,7 +347,7 @@
           {
             "type": "STRING_PLAYER_STRING",
             "command": "execute as %s at @s run %s",
-            "addition": "title @s title \"Ой а де твоє молочко?\""
+            "addition": "title @s title \"Ой, а де твоє молочко?\""
           },
           {
             "type": "STRING_PLAYER_STRING",
