@@ -12,8 +12,6 @@ public class DonatelloAPI {
 
     private final DonationEvents plugin;
 
-    private static final int MAX_DONATIONS = 5;
-
     public DonatelloAPI(DonationEvents plugin) {
         this.plugin = plugin;
     }
@@ -21,7 +19,7 @@ public class DonatelloAPI {
     /**
      *
      * @param token
-     * @return
+     * @return json list of 10 last donators
      */
 
     public CompletableFuture<String> getJsonDonators(String token) {
